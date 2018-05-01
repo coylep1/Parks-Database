@@ -1,0 +1,82 @@
+﻿a {
+    text-decoration: none;
+}
+
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.centerText {
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+}
+
+header {
+    background-color: lightgrey;
+    padding: 0px;
+}
+
+li {
+    text-decoration: none !important;
+
+}
+
+#quoteBlock {
+    font-family: Georgia;
+    display: table;
+    width: 80%;
+    background-color: tan;
+    color: sienna;
+    text-align: center;
+    align-content: center;
+    border-style: groove;
+    border-color: saddlebrown;
+    border-radius: 25px;
+    margin: 0 auto;
+}
+
+.evenDiv {
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    font-size: x-large;
+    background-color: lightgrey;
+    text-align: center;
+}
+.oddDiv {
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    font-size: x-large;
+    background-color: lightcyan;
+    text-align: center;
+}
+
+.detailTable {
+    border-style: double;
+    border-width: 2px;
+    border: double;
+}
+
+.detailTable td {
+    height: 50px;
+    border-style: double;
+    border-width: 2px;
+    padding: 10px;
+}
+
+td, p {
+    font-size: 14px;
+}
+
+.parkListTables {
+    height: 365px;
+    background-color: lightgrey;
+    border-color: grey;
+    border-radius: 25px;
+    margin: 30px;
+    padding: 15px;
+}

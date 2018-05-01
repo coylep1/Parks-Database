@@ -1,0 +1,101 @@
+﻿
+
+@using Capstone.Web.Models
+@model DetailModel
+@{
+    TempData["parkCode"] = Model.NationalPark.ParkCode;
+}
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/Style.css" rel="stylesheet" />
+<div class="centerText container-fluid">
+    <img style="border-radius: 25px; padding-top: 10px;" src="~/Content/@(Model.NationalPark.ParkCode).jpg" />
+    <br />
+    <h1>@Model.NationalPark.ParkName</h1>
+    @if (Model.NationalPark.EntryFee != 0)
+    {
+        <p>Entry Fee: @Model.NationalPark.EntryFee.ToString("C")</p>
+    }
+    else
+    {
+        <p>Entry Fee: Free!!</p>
+    }
+    <div align="center" id="quoteBlock">
+        <p>"@Model.NationalPark.InspirationalQuote"</p>
+        <p style="font-style: italic">-@Model.NationalPark.InspirationalQuoteSource</p>
+    </div><br />
+    <p>@Model.NationalPark.ParkDescription.</p>
+
+    <table align="center" class="detailTable">
+        <tr>
+            <td>Year Founded: @Model.NationalPark.YearFounded</td>
+            <td>Annual Visitor Count: @(string.Format("{0:n0}",(Model.NationalPark.AnnualVisitorCount))) people</td>
+        </tr>
+        <tr>
+            <td>Climate: @Model.NationalPark.Climate</td>
+            <td>Miles of Trail: @(string.Format("{0:n}",(Model.NationalPark.MilesOfTrail))) miles</td>
+        </tr>
+        <tr>
+            <td>Acreage: @(string.Format("{0:n}",(Model.NationalPark.Acreage))) acres</td>
+            <td>Number of Campsites: @Model.NationalPark.NumberOfCampsites</td>
+        </tr>
+        <tr>
+            <td>Elevation: @(string.Format("{0:n}", (Model.NationalPark.Elevation))) ft.</td>
+            <td>Number of Animal Species: @Model.NationalPark.NumberOfAnimalSpecies</td>
+        </tr>
+    </table>
+    <br />
+    <br />
+    <h3 style="text-align: center">Five Day Forecast</h3>
+    <hr style="width:85%" />
+    <form method="get" action="@Url.Action("Detail", "Home")">
+        <select name="tempType">
+            <option value="fahrenheit">Fahrenheit</option>
+            <option value="celsius">Celsius</option>
+        </select><input type="submit" />
+    </form>
+
+    @foreach (WeatherReport report in Model.WeatherReports)
+    {
+
+        if (report.FiveDayForecastValue == 1)
+        {
+            <div style="width: 25%; float: left">
+                <p>Today</p>
+                <div>
+                    @if (report.Forecast.Contains(" "))
+                    {
+                        <img src="~/Content/Weather/@(report.Forecast.Replace(" ", "")).png" />
+                    }
+                    else
+                    {
+                        <img src="~/Content/Weather/@(report.Forecast).png" />
+                    }
+                </div>
+                <div>
+                    <p>High: @report.High</p>
+                    <p>Low: @report.Low</p>
+                    <p>@Model.AdvisoryMessage(report)</p>
+                </div>
+            </div>
+        }
+        if (report.FiveDayForecastValue != 1)
+        {
+            <div style="width: 18%; display: inline-block; float: left">
+                <br />
+                <p>@DateTime.Now.AddDays(report.FiveDayForecastValue - 1).DayOfWeek</p>
+                @if (report.Forecast.Contains(" "))
+                {
+                    <img style="width: 60%" src="~/Content/Weather/@(report.Forecast.Replace(" ", "")).png" />
+                }
+                else
+                {
+                    <img style="width: 60%" src="~/Content/Weather/@(report.Forecast).png" />
+                }
+                <p>High: @report.High</p>
+                <p>Low: @report.Low</p>
+            </div>
+        }
+    }
+
+</div>
+
